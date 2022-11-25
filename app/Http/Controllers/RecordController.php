@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RecordResource;
 use App\Models\Record;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -10,14 +11,14 @@ class RecordController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $records = Record::where('user_id', $request->get('user_id'));
+        $records = Record::with('category')->where('user_id', $request->get('user_id'));
         if ($request->has('category_id')) {
             $records = $records->where('category_id', $request->get('category_id'));
         }
 
         $records = $records->orderBy('created_at', 'DESC')->get();
 
-        return response()->json($records);
+        return response()->json(RecordResource::collection($records));
     }
 
     public function store(Request $request): JsonResponse
