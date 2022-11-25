@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index(): JsonResponse
     {
-        return new JsonResponse(Category::all());
+        return response()->json(Category::all());
     }
 
     public function store(Request $request): JsonResponse
@@ -18,12 +18,12 @@ class CategoryController extends Controller
         try {
             Category::create($request->only(['name']));
         } catch (\Throwable $e) {
-            return new JsonResponse([
+            return response()->json([
                 'message' => 'Unable to create a category',
             ], 500);
         }
 
-        return new JsonResponse([
+        return response()->json([
             'message' => 'The category was created successfully',
         ], 201);
     }

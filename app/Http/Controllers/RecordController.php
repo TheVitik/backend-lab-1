@@ -17,7 +17,7 @@ class RecordController extends Controller
 
         $records = $records->orderBy('created_at', 'DESC')->get();
 
-        return new JsonResponse($records);
+        return response()->json($records);
     }
 
     public function store(Request $request): JsonResponse
@@ -25,12 +25,12 @@ class RecordController extends Controller
         try {
             Record::create($request->only(['user_id', 'category_id', 'sum']));
         } catch (\Throwable $e) {
-            return new JsonResponse([
+            return response()->json([
                 'message' => 'Unable to create a record',
             ], 500);
         }
 
-        return new JsonResponse([
+        return response()->json([
             'message' => 'The record was created successfully',
         ], 201);
     }

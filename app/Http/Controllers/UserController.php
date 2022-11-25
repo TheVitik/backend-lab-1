@@ -13,17 +13,13 @@ class UserController extends Controller
         try {
             User::create($request->only(['name']));
         } catch (\Throwable $e) {
-            return new JsonResponse([
-                'success' => false,
+            return response()->json([
                 'message' => 'Unable to create the user',
-                'data' => []
             ], 500);
         }
 
-        return new JsonResponse([
-            'success' => true,
+        return response()->json([
             'message' => 'The user was created successfully',
-            'data' => []
-        ]);
+        ], 201);
     }
 }
