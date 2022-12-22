@@ -11,11 +11,23 @@ class Record extends Model
 {
     use HasFactory;
 
+    protected $with = ['category'];
+
     protected $fillable = [
         'user_id',
         'category_id',
         'sum'
     ];
+
+    public static function getByUser(int $id)
+    {
+        return self::where('user_id', $id)->latest()->get();
+    }
+
+    public static function getByUserAndCategory(int $userId, int $categoryId)
+    {
+        return self::where('user_id', $userId)->where('category_id', $categoryId)->latest()->get();
+    }
 
     public function category(): BelongsTo
     {

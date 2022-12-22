@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\RecordController;
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\V1\CategoryController;
+use App\Http\Controllers\V1\RecordController;
+use App\Http\Controllers\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*

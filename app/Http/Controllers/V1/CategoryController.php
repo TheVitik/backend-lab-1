@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\CreateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+
+use function response;
 
 class CategoryController extends Controller
 {
@@ -13,7 +16,7 @@ class CategoryController extends Controller
         return response()->json(Category::all());
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(CreateCategoryRequest $request): JsonResponse
     {
         try {
             Category::create($request->only(['name']));
